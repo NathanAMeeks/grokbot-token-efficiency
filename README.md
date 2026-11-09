@@ -1,7 +1,7 @@
 # Grok Bot Token Efficiency
 
 Practical rules for cutting token and usage burn when running long-lived Grok Bot agents (research chats, routines, media agents).
-Author: **Nathan A. Meeks**. Adopted October 28, 2026.
+Author: **Nathan A. Meeks**. Adopted October 28, 2026; rules added November 7 and 9, 2026.
 
 ## Why
 A 7-day Grok Bot usage report (Oct 22–29, 2026) showed:
@@ -20,11 +20,24 @@ So the biggest lever is the **long chat context**, not the routines. Every reque
    - Keep a locked character and style sheet so you don't re-describe or regenerate them.
    - Keep a `MEDIA_STATUS.md`, the media version of rule 1.
 
+## Added rules (November 7 and 9, 2026)
+A usage report on Nov 9, 2026 showed **31.7%** of the weekly limit used in about a day, and **bot-to-bot messaging** was the largest cost: roughly 55% of that day's usage. Code used 47% (29 points of it bot-to-bot) and Audit used 19% (17 points bot-to-bot). Routines used only about 2%. The lever had moved from long chats to agents talking to each other.
+
+6. **Research and optimization only on request.** Approved production work keeps running, but agents don't start experiments on their own.
+7. **One owner per task.** Hand work off only for a needed action or a final result. No repeated status requests and no acknowledgement chains.
+8. **Read only what changed.** Open only the relevant changed code or log excerpts, and reuse saved benchmarks instead of rerunning them. Keep full proof checks and independent audits.
+9. **Audit finished candidates only, once each.** If a fix fails twice, it goes to the human before another build-and-audit round.
+10. **One heavy job at a time per agent.** Finish or pause one before starting the next.
+11. **Stop at milestones.** Big tasks stop and report at a clear milestone instead of continuing open-ended.
+12. **Short bot messages, with data passed by file path.** Messages between agents are half their former length, with no chit-chat. Algorithms, code and data are shared as a file path, never pasted. Use agent messages only for needed context or real emergencies.
+13. **One-line status updates,** both to the human and between agents.
+14. **Event-driven over polling.** Suppress status-only wake-ups, send informational messages without waking the recipient, and prefer connectors and local scripts over desktop or browser work.
+
 ## Supporting research (external, cited)
 See [`RESEARCH.md`](RESEARCH.md) for sources: context editing, filtering data before it enters context, subagent cost multipliers, model routing and prompt caching. It also covers why output-compression add-ons were **not** adopted: independent measurements found they raised the billed cost or saved little. Lesson: measure the bill, not a tool's self-reported "tokens saved".
 
 ## Results
-Nathan reports burning far fewer tokens since adopting these rules. No before/after percentage is claimed here, because there was no controlled measurement. The baseline above (88/12 split) is the only measured figure.
+Nathan reports burning far fewer tokens since adopting these rules. No before/after percentage is claimed here, because there was no controlled measurement. The measured figures are the Oct 22–29 baseline (88/12) and the Nov 9 usage shares above. No result for rules 6–14 has been measured yet.
 
 ## Templates
 - `templates/STATUS.md`: source-of-truth template
